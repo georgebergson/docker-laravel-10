@@ -5,12 +5,12 @@ services:
     build:
       context: ./
       dockerfile: docker/php/DockerFile
-    container_name: dewtech-app
+    container_name: laravel-app
     restart: always
     working_dir: /var/www/
     volumes:
       - ./:/var/www
-      - ./application:/var/www/application
+      - ./app:/var/www/app
     environment:
       - COMPOSER_HOME=/composer
       - COMPOSER_ALLOW_SUPERUSER=1
@@ -22,20 +22,20 @@ services:
 
   nginx:
     image: nginx:1.25.1-alpine-slim
-    container_name: dewtech-nginx
+    container_name: laravel-nginx
     restart: always
     ports:
       - "8000:80"
     volumes:
       - ./:/var/www
-      - ./application:/var/www/application
+      - ./app:/var/www/app
       - ./docker/nginx:/etc/nginx/conf.d
 
   redis:
     build:
       context: ./
       dockerfile: docker/redis/DockerFile
-    container_name: dewtech-redis
+    container_name: laravel-redis
     restart: always
     ports:
       - "6379:6379"
@@ -45,7 +45,7 @@ services:
     build:
       context: ./
       dockerfile: docker/db/DockerFile
-    container_name: dewtech-db
+    container_name: laravel-db
     restart: always
     environment:
       - POSTGRES_DB=postgres

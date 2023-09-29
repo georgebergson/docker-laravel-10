@@ -45,8 +45,8 @@ COPY . /var/www
 COPY --chown=www:www . /var/www
 
 # Ajuste de permissões
-RUN chown -R www-data:www-data /var/www/application
-RUN chmod -R 777 /var/www/application
+RUN chown -R www-data:www-data /var/www/app
+RUN chmod -R 777 /var/www/app
 
 # Change current user to www
 USER www
